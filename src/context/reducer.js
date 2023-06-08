@@ -6,7 +6,8 @@ const reducer = (state, action ) => {
     if(action.type === STARTUPS){
         return {
             ...state,
-            isLoading : true
+            isLoading : true,
+            response : action.payload.response
         }
     }
 

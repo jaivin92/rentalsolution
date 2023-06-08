@@ -2,8 +2,21 @@ import React from 'react'
 import { Typography,Grid, Button } from '@mui/material';
 import { Box } from '@mui/system';
 import Cake from '../images/cake.png'
+import { useAppContext } from 'context/appcontext';
+
 
 const HeroSection = () => {
+
+    const {   isLoading, response, startMayApp} = useAppContext();
+
+
+    const handleleclick =() => {
+        startMayApp()
+
+        console.log(isLoading, " <><><><>  " , response)
+    }
+
+
     return (
         <Grid container direction="row" alignItems="center">
         <Grid item xs={12} sm={6} order={{xs:2,sm:1}}>
@@ -13,7 +26,7 @@ const HeroSection = () => {
             <Typography variant="h5">
                we offer tasty cakes and sweets for you.
             </Typography>
-            <Button size="large" variant="contained" sx={{borderRadius:5}}>
+            <Button size="large" variant="contained" sx={{borderRadius:5}} onClick={handleleclick}>
                Call us
             </Button>
         </Grid>

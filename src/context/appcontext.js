@@ -1,20 +1,41 @@
 import React, { useReducer, useContext, useEffect } from "react";
 import reducer from "./reducer";
-
-const AppContext = React.createContext();
+import axios from "axios";
+import { STARTUPS } from "./action";
 
 
 const initialState = {
     isLoading: false,
+    response: "",
 }
 
+const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
+    const authFetch = axios.create({
+        baseURL: "https://testapi.vasantsoftwaressolution.com/weatherforecast",
+      });
+    
+      const startMayApp = async () => {
+        try {
+            
+            const response =  await authFetch.get();
+            console.log(response.data)
+            dispatch({
+                type: STARTUPS,
+                payload: response.data
+            })
+
+        } catch (error) {
+            console.log(error);
+        }
+      }
+
     return (
         <AppContext.Provider
-        value={{...state}}
+        value={{...state, startMayApp}}
         >
                 {children}
 
